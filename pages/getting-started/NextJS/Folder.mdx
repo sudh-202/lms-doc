@@ -1,13 +1,254 @@
-
-
-# Introduction
+# Folder Structure
  
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
 
-## What is Nextra?
+## Changing `packages` version
 
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
+To make LMS work with all dependencies, we need to update version of following packages:
 
-## Documentation
+###### `next{:tsx}` from  `@latest`  to  `13.4.12`
+###### `eslint-config-next{:tsx}` from  `@latest`  to  `13.4.12`
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+## Application Folder Structure 
+```js  copy
+
+
+│
+├───actions
+│       get-analytics.ts
+│       get-chapter.ts
+│       get-courses.ts
+│       get-dashboard-courses.tsx
+│       get-progress.ts
+│
+├───app
+│   │   favicon.ico
+│   │   globals.css
+│   │   layout.tsx
+│   │
+│   ├───(auth)
+│   │   └───(routes)
+│   │       ├───sign-in
+│   │       │   └───[[...sign-in]]
+│   │       │           page.tsx
+│   │       │
+│   │       └───sign-up
+│   │           └───[[...sign-up]]
+│   │                   page.tsx
+│   │
+│   ├───(course)
+│   │   └───courses
+│   │       └───[courseId]
+│   │           │   layout.tsx
+│   │           │   page.tsx
+│   │           │
+│   │           ├───chapters
+│   │           │   └───[chapterId]
+│   │           │       │   page.tsx
+│   │           │       │
+│   │           │       └───_components
+│   │           │               course-enroll-button.tsx
+│   │           │               course-progress-button.tsx
+│   │           │               video-player.tsx
+│   │           │
+│   │           └───_components
+│   │                   course-mobile-sidebar.tsx
+│   │                   course-navbar.tsx
+│   │                   course-sidebar-item.tsx
+│   │                   course-sidebar.tsx
+│   │
+│   ├───(dashboard)
+│   │   │   layout.tsx
+│   │   │
+│   │   ├───(routes)
+│   │   │   ├───(root)
+│   │   │   │   │   page.tsx
+│   │   │   │   │
+│   │   │   │   └───_components
+│   │   │   │           info-card.tsx
+│   │   │   │
+│   │   │   ├───search
+│   │   │   │   │   page.tsx
+│   │   │   │   │
+│   │   │   │   └───_components
+│   │   │   │           categories.tsx
+│   │   │   │           category-item.tsx
+│   │   │   │
+│   │   │   └───teacher
+│   │   │       ├───analytics
+│   │   │       │   │   page.tsx
+│   │   │       │   │
+│   │   │       │   └───_components
+│   │   │       │           chart.tsx
+│   │   │       │           data-card.tsx
+│   │   │       │
+│   │   │       ├───courses
+│   │   │       │   │   page.tsx
+│   │   │       │   │
+│   │   │       │   ├───[courseId]
+│   │   │       │   │   │   page.tsx
+│   │   │       │   │   │
+│   │   │       │   │   ├───chapters
+│   │   │       │   │   │   └───[chapterId]
+│   │   │       │   │   │       │   page.tsx
+│   │   │       │   │   │       │
+│   │   │       │   │   │       └───_components
+│   │   │       │   │   │               chapter-access-form.tsx
+│   │   │       │   │   │               chapter-actions.tsx
+│   │   │       │   │   │               chapter-description-form.tsx
+│   │   │       │   │   │               chapter-title-form.tsx
+│   │   │       │   │   │               chapter-video-form.tsx
+│   │   │       │   │   │
+│   │   │       │   │   └───_components
+│   │   │       │   │           actions.tsx
+│   │   │       │   │           attachment-form.tsx
+│   │   │       │   │           category-form.tsx
+│   │   │       │   │           chapters-form.tsx
+│   │   │       │   │           chapters-list.tsx
+│   │   │       │   │           description-form.tsx
+│   │   │       │   │           image-form.tsx
+│   │   │       │   │           price-form.tsx
+│   │   │       │   │           title-form.tsx
+│   │   │       │   │
+│   │   │       │   └───_components
+│   │   │       │           columns.tsx
+│   │   │       │           data-table.tsx
+│   │   │       │
+│   │   │       └───create
+│   │   │               page.tsx
+│   │   │
+│   │   └───_components
+│   │           logo.tsx
+│   │           mobile-sidebar.tsx
+│   │           navbar.tsx
+│   │           sidebar-item.tsx
+│   │           sidebar-routes.tsx
+│   │           sidebar.tsx
+│   │
+│   ├───api
+│   │   ├───courses
+│   │   │   │   route.ts
+│   │   │   │
+│   │   │   └───[courseId]
+│   │   │       │   route.ts
+│   │   │       │
+│   │   │       ├───attachments
+│   │   │       │   │   route.ts
+│   │   │       │   │
+│   │   │       │   └───[attachmentId]
+│   │   │       │           route.ts
+│   │   │       │
+│   │   │       ├───chapters
+│   │   │       │   │   route.ts
+│   │   │       │   │
+│   │   │       │   ├───reorder
+│   │   │       │   │       route.ts
+│   │   │       │   │
+│   │   │       │   └───[chapterId]
+│   │   │       │       │   route.ts
+│   │   │       │       │
+│   │   │       │       ├───progress
+│   │   │       │       │       route.ts
+│   │   │       │       │
+│   │   │       │       ├───publish
+│   │   │       │       │       route.ts
+│   │   │       │       │
+│   │   │       │       ├───publish copy
+│   │   │       │       │       route.ts
+│   │   │       │       │
+│   │   │       │       └───unpublish
+│   │   │       │               route.ts
+│   │   │       │
+│   │   │       ├───checkout
+│   │   │       │       route.ts
+│   │   │       │
+│   │   │       ├───publish
+│   │   │       │       route.ts
+│   │   │       │
+│   │   │       └───unpublish
+│   │   │               route.ts
+│   │   │
+│   │   ├───uploadthing
+│   │   │       core.ts
+│   │   │       route.ts
+│   │   │
+│   │   └───webhook
+│   │           route.ts
+│   │
+│   └───test
+│           page.tsx
+│
+├───components
+│   │   banner.tsx
+│   │   course-card.tsx
+│   │   course-progress.tsx
+│   │   courses-list.tsx
+│   │   editor.tsx
+│   │   file-upload.tsx
+│   │   icon-badge.tsx
+│   │   navbar-routes.tsx
+│   │   preview.tsx
+│   │   search-input.tsx
+│   │
+│   ├───modals
+│   │       confirm-modal.tsx
+│   │
+│   ├───providers
+│   │       confetti-provider.tsx
+│   │       toaster-provider.tsx
+│   │
+│   └───ui
+│           alert-dialog.tsx
+│           badge.tsx
+│           button.tsx
+│           card.tsx
+│           checkbox.tsx
+│           combobox.tsx
+│           command.tsx
+│           dialog.tsx
+│           dropdown-menu.tsx
+│           form.tsx
+│           input.tsx
+│           label.tsx
+│           popover.tsx
+│           progress.tsx
+│           separator.tsx
+│           sheet.tsx
+│           table.tsx
+│           textarea.tsx
+│
+├───hooks
+│       use-confetti-store.ts
+│       use-debounce.tsx
+│
+├───lib
+│       db.ts
+│       format.ts
+│       stripe.ts
+│       uploadthing.ts
+│       utils.ts
+│
+├───prisma
+│       schema.prisma
+│
+├───public
+│       logo.svg
+│       next.svg
+│       vercel.svg
+│
+├───scripts
+│
+├───seed.ts
+│
+├─── .eslintrc.json
+├───.gitignore
+├───components.json
+├───middleware.ts
+├───next.config.js
+├───package-lock.json
+├───package.json
+├───postcss.config.js
+├───README.md
+├───tailwind.config.js
+├───tsconfig.json
+
+```        
